@@ -27,7 +27,6 @@ axios.interceptors.request.use((req)=>{
 export const UserContext=createContext()
 
 function App() {
-if(document.cookie=="") localStorage.clear()
 
 const user=JSON.parse(localStorage.getItem("profile") )|| "";
 
