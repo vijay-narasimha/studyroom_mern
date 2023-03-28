@@ -67,6 +67,7 @@ exports.login = catchasync(async (req, res, next) => {
 
 exports.verifytoken=catchasync(async (req,res,next)=>{
   // const token=req.cookies?.jwt
+  console.log('token',req.cookies)
   const token=req.headers['authorization'].split(' ')[1]
   
   
