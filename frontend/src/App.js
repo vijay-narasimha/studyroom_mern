@@ -15,7 +15,7 @@ import UpdateUser from './components/Updateuser'
 import Profile from './components/Profile';
 import Myprofile from './components/Myprofile';
 import axios from 'axios'
-axios.defaults.baseURL='http://localhost:5000'
+axios.defaults.baseURL=process.env.REACT_APP_SERVER_URL
 axios.defaults.withCredentials=true
 
 export const UserContext=createContext()

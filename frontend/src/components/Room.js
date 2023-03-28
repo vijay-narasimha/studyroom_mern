@@ -12,7 +12,7 @@ export default function Room({ topicname }) {
 
   async function datafetch() {
     try {
-      const rooms = await axios.get(`/rooms?topic=${topicname}&q='c' `);
+      const rooms = await axios.get(`/rooms?topic=${topicname} `);
 
       setRooms(rooms.data.rooms);
       setTopic(rooms.data.topics);

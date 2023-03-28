@@ -1,13 +1,16 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const app = require('./app');
+
 const ws=require('ws')
 const Message=require('./models/Messages')
 
 dotenv.config();
-
+const app = require('./app');
 const db = process.env.MONGODB;
 const port = process.env.PORT || 5000;
+
+
+
 
 mongoose
   .connect(db, {

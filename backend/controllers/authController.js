@@ -4,6 +4,7 @@ const catchasync = require('../utils/catchasync');
 const AppError = require('../utils/apperror');
 
 const signtoken = (id) => {
+  console.log(process.env.JWTSECRET)
   return jwt.sign({ id }, process.env.JWTSECRET, {
     expiresIn: '1d',
   });
