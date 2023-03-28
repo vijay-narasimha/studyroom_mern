@@ -64,7 +64,7 @@ export default function Room({ topicname }) {
             <div className='d-flex '>
               
                 <img
-                  src={`http://localhost:5000/${user[index].photo}`}
+                  src={`${process.env.REACT_APP_SERVER_URL}/${user[index].photo}`}
                   style={{
                     width: '5%',
                     cursor: 'pointer',

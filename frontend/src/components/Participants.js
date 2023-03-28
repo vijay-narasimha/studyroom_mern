@@ -14,11 +14,11 @@ export default function Participants() {
 
   const result = users.map((user, index) => {
     return (
-    <a href={`/userprofile/${user.name}`}> 
-    <div key={index} className='w-100 d-flex  my-3' style={{marginLeft:'8em'}}>  
+    <a href={`/userprofile/${user.name}`} key={index}> 
+    <div  className='w-100 d-flex  my-3' style={{marginLeft:'8em'}}>  
     
     <img
-    src={`http://localhost:5000/${user.photo}`}
+    src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
     style={{
       width: '10%',
       cursor: 'pointer',

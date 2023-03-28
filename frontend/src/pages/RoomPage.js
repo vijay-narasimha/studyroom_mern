@@ -34,7 +34,7 @@ export default function RoomPage() {
           style={{ minHeight: '70vh' }}
           className=' h1 d-flex justify-content-center align-items-center'
         >
-          {err}
+          LOADING...
         </Container>
       ) : (
         <Container>

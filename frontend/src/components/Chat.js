@@ -130,7 +130,7 @@ export default function Chat() {
   }
 
   function connecttows() {
-    const ws = new WebSocket('ws://localhost:5000');
+    const ws = new WebSocket(`ws://${process.env.REACT_APP_WS}`);
     setWs(ws);
     ws.addEventListener('message', handleservermessage);
     ws.addEventListener('close', () => {
@@ -203,7 +203,7 @@ export default function Chat() {
                 <div className='d-flex'>
                   {' '}
                   <img
-                    src={`http://localhost:5000/${user.photo}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
                     style={{
                       width: '5%',
                       cursor: 'pointer',

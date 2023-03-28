@@ -63,7 +63,7 @@ export default function UserProfile({ id }) {
             <div className='d-flex '>
               
                 <img
-                  src={`http://localhost:5000/${user.photo}`}
+                  src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
                   style={{
                     width: '5%',
                     cursor: 'pointer',
@@ -123,7 +123,7 @@ export default function UserProfile({ id }) {
           <div className='d-flex flex-column align-items-center'>
             <div className='text-center'>
               <img
-                src={`http://localhost:5000/${user.photo}`}
+                src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
                 style={{
                   width: '18%',
 
