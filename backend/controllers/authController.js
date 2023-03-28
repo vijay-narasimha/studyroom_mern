@@ -4,7 +4,7 @@ const catchasync = require('../utils/catchasync');
 const AppError = require('../utils/apperror');
 
 const signtoken = (id) => {
-  console.log(process.env.JWTSECRET)
+  
   return jwt.sign({ id }, process.env.JWTSECRET, {
     expiresIn: '1d',
   });
@@ -17,6 +17,7 @@ const createtoken = (user, statuscode, req, res) => {
   const cookieoptions = {
     samesite: 'none',
     secure:true,
+    httpOnly:true,
     expires: new Date(Date.now() + 24*60*60* 1000),
   };
   user.password=undefined
