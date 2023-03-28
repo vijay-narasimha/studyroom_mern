@@ -1,6 +1,7 @@
 import React,{useRef,useState} from 'react'
 import {Card,Form,Alert,Container,Button} from 'react-bootstrap'
-import {Link,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+import Navbar from './Navbar'
 import axios from 'axios'
 export default function Login() {
 const nameRef=useRef()
@@ -30,6 +31,7 @@ if(res.data.status==='success'){
 
   return (
     <>
+    <Navbar/>
     <Container style={{minHeight:'100vh'}} className='d-flex justify-content-center align-items-center'>
         <div className='w-100' style={{maxWidth:'350px'}} >
         <Card style={{ backgroundColor: '#51546e', borderRadius: '10px' }}>

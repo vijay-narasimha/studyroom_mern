@@ -13,11 +13,11 @@ const signtoken = (id) => {
 const createtoken = (user, statuscode, req, res) => {
   
   const token = signtoken(user._id);
-
+  
   const cookieoptions = {
     samesite: 'none',
     secure:true,
-    httpOnly:true,
+    
     expires: new Date(Date.now() + 24*60*60* 1000),
   };
   user.password=undefined
@@ -45,6 +45,7 @@ return next(new AppError('User already exists',400))
 });
 
 exports.login = catchasync(async (req, res, next) => {
+
   const { email, password } = req.body;
   if (!email) {
     return next(new AppError('please provide user name',400));
@@ -65,8 +66,8 @@ exports.login = catchasync(async (req, res, next) => {
 
 
 exports.verifytoken=catchasync(async (req,res,next)=>{
-  const token=req.cookies?.jwt
-  // const token=req.headers['authorization'].split(' ')[1]
+  // const token=req.cookies?.jwt
+  const token=req.headers['authorization'].split(' ')[1]
   
   
   

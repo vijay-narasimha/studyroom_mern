@@ -15,13 +15,15 @@ export default function Login() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
+    
       const res = await axios.post('/login', {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
-
+         console.log(res)
       if (res.data.status === 'success') {
         localStorage.setItem('profile', JSON.stringify(res.data.user));
+        localStorage.setItem('token',JSON.stringify(res.data.token))
         window.location.reload(navigate('/'));
       }
     } catch (err) {

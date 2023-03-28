@@ -16,7 +16,7 @@ mongoose
   .connect(db, {
     useNewUrlParser: true,
   })
-const server=app.listen(port,()=>{console.log('listening')})
+const server=app.listen(port)
 
 const wss=new ws.WebSocketServer({server})
 wss.on('connection',connection=>{

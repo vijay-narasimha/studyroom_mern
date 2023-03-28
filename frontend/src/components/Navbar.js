@@ -35,7 +35,7 @@ export default function Navbarcomponet() {
 
                 
                   <img
-                    src={`http://localhost:5000/${user.photo}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
                     style={{
                       width: '10%',
                       marginLeft: 'auto',

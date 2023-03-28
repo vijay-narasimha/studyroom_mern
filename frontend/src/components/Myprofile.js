@@ -11,7 +11,7 @@ export default function UserProfile() {
 
   async function datafetch() {
     const res = await axios.get(`/user/${localuser.name}`);
-    console.log(res)
+    
     setRooms(res.data.rooms);
     setUser(res.data.user);
     setTopic(res.data.topics)

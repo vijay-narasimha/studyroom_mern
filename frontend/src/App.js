@@ -17,6 +17,12 @@ import Myprofile from './components/Myprofile';
 import axios from 'axios'
 axios.defaults.baseURL=process.env.REACT_APP_SERVER_URL
 axios.defaults.withCredentials=true
+axios.interceptors.request.use((req)=>{
+  if(localStorage.getItem('token')){
+    req.headers.Authorization=`Bearer ${JSON.parse(localStorage.getItem("token"))}`
+  }
+  return req
+})
 
 export const UserContext=createContext()
 
