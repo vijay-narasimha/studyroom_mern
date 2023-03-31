@@ -1,0 +1,206 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "studyroom",
+    "dateExported": "2023-03-31T18:14:48.026Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "39c025b8-074b-424f-b950-d9419fbc8d0b",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "signup",
+            "url": "http://localhost:5000/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-26T12:26:42.273Z",
+            "modified": "2023-03-26T13:11:18.319Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"vijay\",\n  \"email\":\"vijay@gmail.com\",\n  \"password\":\"password\",\n  \"passwordconfirm\":\"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7999e8aa-981e-4665-84ff-8ba5a1bb4c2c",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "login",
+            "url": "http://localhost:5000/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-03-26T12:30:57.035Z",
+            "modified": "2023-03-28T10:47:40.620Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"vijay@gmail.com\",\n  \"password\":\"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "32587d2a-e3fd-4596-a674-d08fc5c4d466",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "logout",
+            "url": "http://localhost:5000/logout",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-03-26T12:45:01.845Z",
+            "modified": "2023-03-26T12:45:13.097Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e57af43d-6570-4015-858d-08429f8ccb2c",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "get User",
+            "url": "http://localhost:5000/user",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-03-26T12:47:51.749Z",
+            "modified": "2023-03-26T13:26:33.082Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjA0NDc2ZmUyYjIxMTgwODU2ZDY0NiIsImlhdCI6MTY3OTgzNzE4MywiZXhwIjoxNjc5OTIzNTgzfQ.CFmWo8au3cH71PTqy6U9stShp-0KQ8wFgRQdGuJJt-s"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1caa23a8-78a8-4f16-b1bf-e7f26e861fb2",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "create room",
+            "url": "http://localhost:5000/room",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-03-26T16:32:37.708Z",
+            "modified": "2023-03-26T17:14:18.257Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"room-3\",\n  \"topic\":\"html\",\n  \"description\":\"description-1\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjA2ZjM3M2VjYWM4OTIwZmVmNmVlYiIsImlhdCI6MTY3OTg0ODQwMSwiZXhwIjoxNjc5OTM0ODAxfQ.4eZE2_-Qi2P58kyPzBm8WZIeXStV_i8g6kNcfSBFxsg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "25f693bc-b30b-4f7f-b5fe-a4ae8c383772",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "updateRoom",
+            "url": "http://localhost:5000/room/642074e196e277d3c1303546",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-03-26T16:43:25.592Z",
+            "modified": "2023-03-26T16:44:35.133Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"name\",\n  \"description\":\"description\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjA2ZjM3M2VjYWM4OTIwZmVmNmVlYiIsImlhdCI6MTY3OTg0ODQwMSwiZXhwIjoxNjc5OTM0ODAxfQ.4eZE2_-Qi2P58kyPzBm8WZIeXStV_i8g6kNcfSBFxsg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0253112-53d3-40c1-a174-e59496c6fbd3",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "deleteroom",
+            "url": "http://localhost:5000/room/642074e196e277d3c1303546",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2023-03-26T16:46:53.605Z",
+            "modified": "2023-03-26T16:49:03.601Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjA2ZjM3M2VjYWM4OTIwZmVmNmVlYiIsImlhdCI6MTY3OTg0ODQwMSwiZXhwIjoxNjc5OTM0ODAxfQ.4eZE2_-Qi2P58kyPzBm8WZIeXStV_i8g6kNcfSBFxsg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8ebf86f0-56c1-4ecf-b699-936d5a414e22",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "topics",
+            "url": "http://localhost:5000/topics",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-03-26T16:54:39.824Z",
+            "modified": "2023-03-26T16:54:50.584Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b5bccbdc-7780-4de9-9b1b-c83a99dfbc3e",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "get Rooms",
+            "url": "http://localhost:5000/rooms?search=php",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-03-26T17:22:40.948Z",
+            "modified": "2023-03-31T18:02:34.054Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "search",
+                    "value": "php",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "b3f00f2b-1030-415b-a4bc-9d568edeefbe",
+            "colId": "3268af7f-82ee-47c2-910f-888bc7f886fa",
+            "containerId": "",
+            "name": "update profile",
+            "url": "http://localhost:5000/updateprofile",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-03-28T10:42:35.893Z",
+            "modified": "2023-03-28T10:52:45.479Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "photo",
+                        "value": "d:\\pass photo.jpeg"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjJjM2RhOTkxOWFlYWNiZThlOTBlOSIsImlhdCI6MTY4MDAwMDQ2MCwiZXhwIjoxNjgwMDg2ODYwfQ.uHPg2o8GNiCJih2pdXUjDcmejH-tMgygMPzf7ap-yAk"
+            },
+            "tests": []
+        }
+    ]
+}

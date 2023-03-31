@@ -53,6 +53,7 @@ export default function UserProfile() {
   
 
   const roomdata = rooms.map((room, index) => {
+     const value= room.private?'Private':""
     return (
       <Container key={index} className='mb-2'>
         <Card className='main-room'>
@@ -100,7 +101,12 @@ export default function UserProfile() {
             >
               {room.description}
             </div>
-            <p className='room-topic'>{topic[index]}</p>
+          <div className='d-flex justify-content-between mx-4 mt-1' >
+          <p className='room-topic'>{topic[index]}</p>
+         
+         {value==='Private'&& <p className='room-topic'>{value}</p>}
+
+          </div>
           </Card.Body>
         </Card>
       </Container>

@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
+import { Container, Nav, Navbar, Modal, Button, Form } from 'react-bootstrap';
 import { UserContext } from '../App';
-import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import Fav from '../assets/favicon.ico';
 export default function Navbarcomponet() {
   const { user } = useContext(UserContext);
@@ -10,7 +10,16 @@ export default function Navbarcomponet() {
     localStorage.clear();
     window.location.reload();
   };
+  const navigate = useNavigate();
+  const [code, setCode] = useState('');
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleModal = () => {
+    localStorage.setItem('private', JSON.stringify(code));
+    navigate('privateroom');
+  };
   return (
     <>
       <Navbar className='custom-navbar' sticky='top'>
@@ -29,37 +38,39 @@ export default function Navbarcomponet() {
             {user ? (
               <Nav className='ms-auto text-center'>
                 <a href={`/userprofile/${user.name}`}>
-                <div className='d-flex'>
-                  
+                  <div className='d-flex'>
+                    <img
+                      src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                      style={{
+                        width: '10%',
+                        marginLeft: 'auto',
+                        borderRadius: '50%',
+                        border: '2px solid #71c6dd',
+                      }}
+                    />
 
-
-                
-                  <img
-                    src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
-                    style={{
-                      width: '10%',
-                      marginLeft: 'auto',
-                      borderRadius: '50%',
-                      border: '2px solid #71c6dd',
-                      
-                    }}
-                  />
-                  
-                  
-                  <div
-                    style={{
-                      color: '#71c6dd',
-                      padding: '10px',
-                      fontSize: '20px',
-                    }}
-                  >
-                    {user.name}
+                    <div
+                      style={{
+                        color: '#71c6dd',
+                        padding: '10px',
+                        fontSize: '20px',
+                      }}
+                    >
+                      {user.name}
+                    </div>
                   </div>
-                 
-                </div>
                 </a>
-
-                <Nav.Link 
+                <Nav.Link
+                  onClick={handleShow}
+                  style={{
+                    color: '#e5e5e5',
+                    fontWeight: '500',
+                    fontSize: '20px',
+                  }}
+                >
+                  Enter Room
+                </Nav.Link>
+                <Nav.Link
                   onClick={handlelogout}
                   style={{
                     color: '#e5e5e5',
@@ -88,6 +99,37 @@ export default function Navbarcomponet() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header
+          style={{ backgroundColor: '#696d97', border: 'none' }}
+          closeButton
+        >
+          <Modal.Title>Enter Room</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ backgroundColor: '#51546e' }}>
+          Enter the code to enter the private room
+          <Form>
+            <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+              <Form.Control
+                type='text'
+                className='input-bar mt-2'
+                placeholder='Enter code here'
+                autoComplete='off'
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer style={{ backgroundColor: '#51546e', border: 'none' }}>
+          <Button variant='secondary' onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant='info' onClick={handleModal}>
+            Enter room
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

@@ -12,7 +12,7 @@ export default function Chat() {
   const localuser = JSON.parse(localStorage.getItem('profile')) || '';
 
   const navigate = useNavigate();
-  const { id } = useParams();
+  
   const [room, setRoom] = useState({});
   const [topic, setTopic] = useState();
   const [user, setUser] = useState({});
@@ -100,6 +100,35 @@ export default function Chat() {
     );
   });
 
+  function timeSince(date) {
+    var seconds = Math.floor((new Date() - new Date(date)) / 1000);
+
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + ' years ago';
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + ' months ago';
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + ' days ago';
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      if (Math.floor(interval) == 1) return Math.floor(interval) + ' hour ago';
+
+      return Math.floor(interval) + ' hours ago';
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + ' minutes ago';
+    }
+    return Math.floor(seconds) + ' seconds ago';
+  }
+
   function connecttows() {
     const ws = new WebSocket(`wss://${process.env.REACT_APP_WS}`);
     setWs(ws);
@@ -165,7 +194,7 @@ export default function Chat() {
                 <h2>{room.name}</h2>
                 <p>{timeSince(room.createdAt)}</p>
               </div>
-              <div className='d-flex w-100'>
+              <div className='d-flex '>
               <div>
 
                 <p>Hosted by:</p>
@@ -197,11 +226,9 @@ export default function Chat() {
                 </div>
                 </a>
               </div>
-              {room.private===true &&
-              <div style={{fontSize:'20px'}} className='ms-auto'>
+              <div style={{fontSize:'20px'}}>
                 Code:<span className='ms-2 text-white'>{room.code}</span>
               </div>
-}
               </div>
               <div>{room.description}</div>
               <div className='mb-3 room-topic'>{topic}</div>

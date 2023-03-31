@@ -67,8 +67,8 @@ exports.login = catchasync(async (req, res, next) => {
 
 exports.verifytoken=catchasync(async (req,res,next)=>{
   // const token=req.cookies?.jwt
-  console.log('token',req.cookies)
-  const token=req.headers['authorization'].split(' ')[1]
+  // console.log('token',req.cookies)
+  const token=req.headers['authorization']?.split(' ')[1]
   
   
   
@@ -80,4 +80,23 @@ exports.verifytoken=catchasync(async (req,res,next)=>{
   return next()
   }
   next(new AppError('no token',400))
+})
+
+
+exports.verifyroom=catchasync(async (req,res,next)=>{
+  // const token=req.cookies?.jwt
+  // console.log('token',req.cookies)
+  const token=req.headers['authorization']?.split(' ')[1]
+  
+  req.id=null
+  
+  if(token){
+  const decoded=jwt.verify(token,process.env.JWTSECRET)
+  
+  req.id=decoded.id 
+  
+  
+  }
+  next()
+  
 })

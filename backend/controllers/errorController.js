@@ -24,7 +24,7 @@ const handleduplicate = (err) => {
 module.exports = (err, req, res, next) => {
   err.statuscode = err.statuscode || 500;
   err.status = err.status || 'error';
-  
+  // console.log(err)
   let error = { ...err };
   error.message = err.message;
   error.name = err.name;

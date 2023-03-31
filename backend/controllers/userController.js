@@ -35,8 +35,16 @@ exports.resizeUserPhoto = catchasync(async (req, res, next) => {
 });
 
 exports.getUser = catchasync(async (req, res, next) => {
+  
   const user = await User.findOne({ name: req.params.name });
-  const rooms = await Room.find({ host: user._id });
+  var rooms=[]
+  
+  if(user._id.toString()===req.id){
+   rooms = await Room.find({ host: user._id });
+  }else{
+     rooms=await Room.find({host:user._id,private:false})
+  }
+
   let topics = [];
   for (let i = 0; i < rooms.length; i++) {
     const topic = await Topic.findById(rooms[i].topic);

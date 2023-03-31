@@ -6,18 +6,22 @@ const User = require('../models/User');
 const Message = require('../models/Messages');
 
 exports.createRoom = catchasync(async (req, res, next) => {
-  const { name, topic, description } = req.body;
+  const { name, topic, description,private } = req.body;
   let topicId = await Topic.findOne({ name: topic });
   if (!topicId) {
     topicId = await Topic.create({ name: topic });
   }
+  const user=await User.findById(req.id)
   const room = await Room.create({
     host: req.id,
     topic: topicId._id,
     name: name,
     description: description,
+    private:private
   });
   room.participants.push(req.id);
+  room.topicname=topic 
+  room.hostname=user.name
   await room.save();
   res.status(201).json({
     status: 'success',
@@ -86,14 +90,27 @@ exports.topicData = catchasync(async (req, res, next) => {
 
 exports.getRooms = catchasync(async (req, res, next) => {
   const topic = req.query.topic;
- 
+  const q=req.query.search
+const keys=['name','hostname','topicname']
+  
+  const search = (data) =>{
+    return data.filter((item) =>
+    keys.some((key) => item[key].toLowerCase().includes(q.toLowerCase()))
+  )}
   if (topic) {
     const topics = await Topic.findOne({ name: topic });
     var rooms = await Room.find({ topic: topics._id }).sort('-updatedAt');
   } else {
-    var rooms = await Room.find().sort('-updatedAt');
+    var rooms = await Room.find({private:false}).sort('-updatedAt');
   }
+if(req.id){
+  var rooms1=await Room.find({host:req.id,private:true})
+  rooms.push(...rooms1)
+}
+if(q){
+  rooms=search(rooms)
 
+}
   let topics = [],
     users = [];
   for (let i = 0; i < rooms.length; i++) {
@@ -113,7 +130,11 @@ exports.getRooms = catchasync(async (req, res, next) => {
 exports.getRoom = catchasync(async (req, res, next) => {
   const room = await Room.findOne({ slug: req.params.slug });
 
+
   if (!room) return next(new AppError("Room doesn't exist", 200));
+  
+if(room.host.toString()!==req.id && room.private===true) return next(new AppError('UnAuthorized Room',400))
+
   const user = await User.findById(room.host);
   const topic = await Topic.findById(room.topic);
   const messages = await Message.find({ room: room._id });
@@ -153,3 +174,23 @@ exports.roomparticipants = catchasync(async (req, res, next) => {
     users,
   });
 });
+
+exports.getPrivateRoom=catchasync(async (req,res,next)=>{
+  const code=req.params.code;
+
+   const room=await Room.findOne({code})
+   const array1 = room.participants;
+   let users = [];
+   for (let i = 0; i < array1.length; i++) {
+     const user = await User.findById(array1[i]);
+ 
+     users.push(user);
+   }
+   const user=await User.findById(room.host)
+  const messages = await Message.find({ room: room._id });
+
+
+  res.json({
+    status:'success',room,users,user,messages
+  })
+})

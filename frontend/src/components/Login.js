@@ -20,7 +20,7 @@ export default function Login() {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
-         console.log(res)
+         
       if (res.data.status === 'success') {
         localStorage.setItem('profile', JSON.stringify(res.data.user));
         localStorage.setItem('token',JSON.stringify(res.data.token))

@@ -14,6 +14,7 @@ import EditRoom from './components/EditRoom'
 import UpdateUser from './components/Updateuser'
 import Profile from './components/Profile';
 import Myprofile from './components/Myprofile';
+import PrivateRoom from './components/PrivateRoom';
 import axios from 'axios'
 axios.defaults.baseURL=process.env.REACT_APP_SERVER_URL
 axios.defaults.withCredentials=true
@@ -61,6 +62,9 @@ const user=JSON.parse(localStorage.getItem("profile") )|| "";
     },{
       path:'profile',
       element:<PrivateRoute><Myprofile/></PrivateRoute>
+    },{
+      path:'privateroom',
+      element:<PrivateRoom/>
     }
   ]);
 

@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import Navbar from './Navbar'
 import axios from 'axios'
 export default function Login() {
+  const [option,setOption]=useState('option1')
 const nameRef=useRef()
 const topicRef=useRef()
 const descriptionRef=useRef()
@@ -12,17 +13,25 @@ const navigate=useNavigate()
 const handlesubmit=async(e)=>{
 e.preventDefault()
 try{
-
+const privateroom=option==='option2' ?true:false
 const res=await axios.post('/room',{
   name:nameRef.current.value,
   topic:topicRef.current.value,
-  description:descriptionRef.current.value
+  description:descriptionRef.current.value,
+  private:privateroom
+
 })
 
 if(res.data.status==='success'){
-  
+  if(res.data.room.private===true){
+    window.location.reload(navigate(`/`))
+
+  }else{
   window.location.reload(navigate(`/room/${res.data.room.slug}`))
+  }
+  
 }
+
 }catch(err){
   setErr(err.response.data.message)
 }
@@ -55,7 +64,17 @@ if(res.data.status==='success'){
               <Form.Label>Topic</Form.Label>
               <Form.Control className='input-bar' type='text' ref={topicRef} placeholder='Enter Room Topic'/>
             </Form.Group>
-            <Form.Group id='description'>
+            <Form.Group id='topic'>
+              <Form.Label>Public</Form.Label>
+              <div className='d-flex justify-content-around'>
+
+              <Form.Check id='topic' type='radio' name='radio' label='YES' value='option1' checked={option==='option1'} onChange={e=>setOption(e.target.value)} />
+              <Form.Check id='topic' type='radio' name='radio' label='NO' value='option2' checked={option==='option2'}  onChange={e=>setOption(e.target.value)}/>
+              </div>
+            
+
+            </Form.Group>
+            <Form.Group id='description' >
               <Form.Label>Description</Form.Label>
               <Form.Control className='input-bar' type='text' ref={descriptionRef} placeholder='Enter Room Description'/>
             </Form.Group>

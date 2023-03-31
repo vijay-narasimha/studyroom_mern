@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Card, Container, Button } from 'react-bootstrap';
+import { Card, Container, Button ,Form} from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,10 +9,11 @@ export default function Room({ topicname }) {
   const [rooms, setRooms] = useState([]);
   const [topic, setTopic] = useState([]);
   const [user, setUser] = useState([]);
+  const [search,setSearch]=useState('')
 
   async function datafetch() {
     try {
-      const rooms = await axios.get(`/rooms?topic=${topicname} `);
+      const rooms = await axios.get(`/rooms?topic=${topicname}&search=${search}`);
 
       setRooms(rooms.data.rooms);
       setTopic(rooms.data.topics);
@@ -52,13 +53,15 @@ export default function Room({ topicname }) {
 
 
   const roomdata = rooms.map((room, index) => {
+    const value= room.private?'Private':""
+
     return (
+    
       <Container key={room._id} className='mb-2'>
         <Card className='main-room'>
           <Card.Body>
             <div>Hosted by:</div>
             <a href={`/userprofile/${user[index].name}`}>
-
 
           
             <div className='d-flex '>
@@ -99,7 +102,12 @@ export default function Room({ topicname }) {
             >
               {room.description}
             </div>
-            <p className='room-topic'>{topic[index]}</p>
+            <div className='d-flex justify-content-between mx-4 mt-1' >
+          <p className='room-topic'>{topic[index]}</p>
+         
+         {value==='Private'&& <p className='room-topic'>{value}</p>}
+
+          </div>
           </Card.Body>
         </Card>
       </Container>
@@ -108,12 +116,27 @@ export default function Room({ topicname }) {
 
   useEffect(() => {
     datafetch();
-  }, [topicname]);
+  }, [topicname,search]);
 
   return (
     <>
+    <Container className='w-50 mt-4'>
+    <Form>
+            <Form.Group className='mb-3'>
+              <Form.Control
+                type='text'
+                className='input-bar mt-2'
+                placeholder='Enter Room name,user,topic'
+                autoComplete='off'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+
+    </Container>
       <Container>
-        <Container className='mt-5'>
+        <Container className='mt-3'>
           <Card className='room-heading'>
             <Card.Body className='mx-2'>
               <div className='d-flex justify-content-between'>
