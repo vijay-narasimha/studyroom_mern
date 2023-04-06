@@ -15,12 +15,12 @@ router.delete('/room/:id',verifytoken,deleteRoom)
 
 router.get('/topics',topicData)
 router.get('/rooms',verifyroom,getRooms)
-router.get('/room/:slug',getRoom)
+router.get('/room/:slug',verifytoken,getRoom)
 router.get('/participants/:id',verifytoken,participants)
 router.post('/updateprofile',verifytoken,uploadUserPhoto,resizeUserPhoto,updateUser)
 router.get('/roomparticipants/:id',roomparticipants)
 
-router.get('/user/:name',getUser)
+router.get('/user/:name',verifytoken,getUser)
 router.get('/privateroom/:code',getPrivateRoom)
 
 
