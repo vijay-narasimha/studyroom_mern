@@ -101,7 +101,7 @@ export default function Chat() {
   });
 
   function connecttows() {
-    const ws = new WebSocket(`ws://${process.env.REACT_APP_WS}`);
+    const ws = new WebSocket(`wss://${process.env.REACT_APP_WS}`);
     setWs(ws);
     ws.addEventListener('message', handleservermessage);
     ws.addEventListener('close', () => {
