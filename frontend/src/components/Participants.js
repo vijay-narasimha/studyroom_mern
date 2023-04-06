@@ -13,6 +13,7 @@ export default function Participants() {
   }
 
   const result = users.map((user, index) => {
+    
     return (
     <a href={`/userprofile/${user.name}`} key={index}> 
     <div  className='w-100 d-flex  my-3' style={{marginLeft:'8em'}}>  

@@ -29,10 +29,14 @@ wss.on('connection',connection=>{
       user:data1.user,
       message:data1.message,
       room:data1.room
-    })
-    connection.send(JSON.stringify(msg))
+    });
+    [...wss.clients].forEach(c=>c.send(JSON.stringify(msg)))
+  
+    // [wss.clients].forEach(c=>console.log('c'))
+    // connection.send(JSON.stringify(msg))
     
   })
+  
 
 })
 

@@ -101,7 +101,7 @@ export default function Chat() {
   });
 
   function connecttows() {
-    const ws = new WebSocket(`wss://${process.env.REACT_APP_WS}`);
+    const ws = new WebSocket(`ws://${process.env.REACT_APP_WS}`);
     setWs(ws);
     ws.addEventListener('message', handleservermessage);
     ws.addEventListener('close', () => {
@@ -113,6 +113,7 @@ export default function Chat() {
 
   function handleservermessage(e) {
     const data = JSON.parse(e.data);
+    console.log(data)
     setRoommessages((prev) => [...prev, { ...data }]);
   }
   function handlemessage(e) {
