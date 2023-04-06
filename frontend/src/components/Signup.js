@@ -24,6 +24,8 @@ const handlesubmit=async(e)=>{
   })
   if(res.data.status==='success'){
     localStorage.setItem("profile",JSON.stringify(res.data.user))
+    localStorage.setItem('token',JSON.stringify(res.data.token))
+
     window.location.reload(navigate('/'))
   }
   }catch(err){
