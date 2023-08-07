@@ -19,7 +19,7 @@ export default function UserProfile() {
   useEffect(() => {
     datafetch();
    
-  }, []);
+  }, []); //eslint-disable-line
   
 
   function timeSince(date) {
@@ -67,6 +67,7 @@ export default function UserProfile() {
               
                 <img
                   src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                  alt='card'
                   style={{
                     width: '5%',
                     cursor: 'pointer',
@@ -132,6 +133,7 @@ export default function UserProfile() {
             <div className='text-center'>
               <img
                 src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                alt='card'
                 style={{
                   width: '18%',
 

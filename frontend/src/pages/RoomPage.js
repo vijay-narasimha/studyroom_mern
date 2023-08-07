@@ -9,23 +9,24 @@ import axios from 'axios';
 export default function RoomPage() {
   const { id } = useParams();
   const [err, setErr] = useState('err');
-  async function datafetch() {
-    try {
-      const res = await axios.get(`/room/${id}`);
-
-      if (res.data.status === 'error') {
-        setErr(res.data.message);
-      } else {
-        setErr('');
-      }
-    } catch (err) {
-      setErr(err.response.data.message);
-    }
-  }
+ 
 
   useEffect(() => {
+    async function datafetch() {
+      try {
+        const res = await axios.get(`/room/${id}`);
+  
+        if (res.data.status === 'error') {
+          setErr(res.data.message);
+        } else {
+          setErr('');
+        }
+      } catch (err) {
+        setErr(err.response.data.message);
+      }
+    }
     datafetch();
-  }, []);
+  }, [id]);
 
   return (
     <>

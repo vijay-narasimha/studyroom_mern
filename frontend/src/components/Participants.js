@@ -20,6 +20,7 @@ export default function Participants() {
     
     <img
     src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+    alt='participants'
     style={{
       width: '10%',
       cursor: 'pointer',
@@ -41,7 +42,8 @@ export default function Participants() {
 
   useEffect(() => {
     datafetch();
-  }, []);
+    
+  }, []); //eslint-disable-line
   return (
     <>
       <Container>

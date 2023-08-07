@@ -11,17 +11,7 @@ export default function Room({ topicname }) {
   const [user, setUser] = useState([]);
   const [search,setSearch]=useState('')
 
-  async function datafetch() {
-    try {
-      const rooms = await axios.get(`/rooms?topic=${topicname}&search=${search}`);
-
-      setRooms(rooms.data.rooms);
-      setTopic(rooms.data.topics);
-      setUser(rooms.data.users);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+ 
   function timeSince(date) {
     var seconds = Math.floor((new Date() - new Date(date)) / 1000);
 
@@ -68,6 +58,7 @@ export default function Room({ topicname }) {
               
                 <img
                   src={`${process.env.REACT_APP_SERVER_URL}/${user[index].photo}`}
+                  alt='room'
                   style={{
                     width: '5%',
                     cursor: 'pointer',
@@ -115,6 +106,17 @@ export default function Room({ topicname }) {
   });
 
   useEffect(() => {
+    async function datafetch() {
+      try {
+        const rooms = await axios.get(`/rooms?topic=${topicname}&search=${search}`);
+  
+        setRooms(rooms.data.rooms);
+        setTopic(rooms.data.topics);
+        setUser(rooms.data.users);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     datafetch();
   }, [topicname,search]);
 

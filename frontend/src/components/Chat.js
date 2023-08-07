@@ -52,7 +52,7 @@ export default function Chat() {
    
     datafetch();
     connecttows();
-  }, []);
+  }, []); //eslint-disable-line
   function timeSince(date) {
     var seconds = Math.floor((new Date() - new Date(date)) / 1000);
 
@@ -151,12 +151,13 @@ export default function Chat() {
                 <a className='ms-auto' href={`/edit-room/${room.slug}`}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                 </a>
-                <a
+                <p
                   onClick={handleShow}
                   style={{ cursor: 'pointer', color: ' #71c6dd' }}
+                  
                 >
                   <FontAwesomeIcon icon={faTrash} />
-                </a>
+                </p>
               </>
             )}
           </Stack>
@@ -178,6 +179,7 @@ export default function Chat() {
                   {' '}
                   <img
                     src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                    alt='user'
                     style={{
                       width: '5%',
                       cursor: 'pointer',

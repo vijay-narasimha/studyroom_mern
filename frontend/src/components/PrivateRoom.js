@@ -58,7 +58,7 @@ export default function PrivateRoom() {
   useEffect(() => {
     datafetch();
     connecttows();
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleJoin = async () => {
     await axios.get(`/participants/${room.slug}`);
@@ -151,6 +151,7 @@ export default function PrivateRoom() {
         <div className='w-100 d-flex  my-3' style={{ marginLeft: '8em' }}>
           <img
             src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+            alt='user'
             style={{
               width: '10%',
               cursor: 'pointer',
@@ -210,12 +211,12 @@ export default function PrivateRoom() {
                         <a className='ms-auto' href={`/edit-room/${room.slug}`}>
                           <FontAwesomeIcon icon={faPenToSquare} />
                         </a>
-                        <a
+                        <p
                           onClick={handleShow}
                           style={{ cursor: 'pointer', color: ' #71c6dd' }}
                         >
                           <FontAwesomeIcon icon={faTrash} />
-                        </a>
+                        </p>
                       </>
                     )}
                   </Stack>
@@ -233,6 +234,7 @@ export default function PrivateRoom() {
                               {' '}
                               <img
                                 src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                                alt='user'
                                 style={{
                                   width: '5%',
                                   cursor: 'pointer',

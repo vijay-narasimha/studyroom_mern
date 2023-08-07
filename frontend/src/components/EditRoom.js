@@ -43,7 +43,7 @@ export default function Login() {
 
   useEffect(() => {
     datafetch();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <>

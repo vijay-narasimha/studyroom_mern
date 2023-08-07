@@ -8,16 +8,17 @@ export default function UserProfile({ id }) {
   const [rooms, setRooms] = useState([]);
   const [topic,setTopic]=useState([])
 
-  async function datafetch() {
-    const res = await axios.get(`/user/${id}`);
-    setRooms(res.data.rooms);
-    setUser(res.data.user);
-    setTopic(res.data.topics)
-  }
+ 
   useEffect(() => {
+    async function datafetch() {
+      const res = await axios.get(`/user/${id}`);
+      setRooms(res.data.rooms);
+      setUser(res.data.user);
+      setTopic(res.data.topics)
+    }
     datafetch();
    
-  }, []);
+  }, [id]);
   
 
   function timeSince(date) {
@@ -64,6 +65,7 @@ export default function UserProfile({ id }) {
               
                 <img
                   src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                  alt='user'
                   style={{
                     width: '5%',
                     cursor: 'pointer',
@@ -124,6 +126,7 @@ export default function UserProfile({ id }) {
             <div className='text-center'>
               <img
                 src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                alt='user'
                 style={{
                   width: '18%',
 

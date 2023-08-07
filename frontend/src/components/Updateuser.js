@@ -22,9 +22,11 @@ const handlesubmit=async (e)=>{
     
     
     const res=await axios.post('/updateprofile',formdata)
-    if(res.data.status=='success'){
+    if(res.data.status==='success'){
         localStorage.setItem('profile',JSON.stringify(res.data.user))
          window.location.reload(navigate("/"))
+    }else{
+      setErr(res.data.message)
     }
 }
 
