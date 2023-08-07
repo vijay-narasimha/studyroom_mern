@@ -28,7 +28,7 @@ export default function Navbarcomponet() {
             href='/'
             style={{ color: '#e5e5e5', fontWeight: '600' }}
           >
-            <img src={Fav} width='20%' />
+            <img src={Fav} width='20%' alt='home page logo' />
             <span className='ms-3 ' style={{ fontSize: '24px' }}>
               Study Room
             </span>
@@ -41,6 +41,7 @@ export default function Navbarcomponet() {
                   <div className='d-flex'>
                     <img
                       src={`${process.env.REACT_APP_SERVER_URL}/${user.photo}`}
+                      alt='user '
                       style={{
                         width: '10%',
                         marginLeft: 'auto',
