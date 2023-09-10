@@ -16,6 +16,8 @@
   padding: 0;
 
   box-sizing: border-box;
+  color: var(--color-light-gray)  ;
+  
 }
 
 ::-webkit-scrollbar {
@@ -23,7 +25,7 @@
 }
 body {
   background-color: var(--color-bg);
-  color: var(--color-light-gray) !important ;
+  color: var(--color-light-gray)  ;
   min-height: 100vh;
 }
 
