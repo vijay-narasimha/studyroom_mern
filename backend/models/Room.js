@@ -32,7 +32,7 @@ const schema=mongoose.Schema({
     },
     code:{
         type:String,
-        unique:true
+        
     }
 
 },{timestamps:true})
