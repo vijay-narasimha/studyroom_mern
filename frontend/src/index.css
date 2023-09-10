@@ -16,10 +16,12 @@
   padding: 0;
 
   box-sizing: border-box;
+  
+}
+.card-body{
   color: var(--color-light-gray)  ;
   
 }
-
 ::-webkit-scrollbar {
   width: 0;
 }
