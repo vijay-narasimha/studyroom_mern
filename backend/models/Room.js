@@ -13,7 +13,8 @@ const schema=mongoose.Schema({
     topic:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Topic',
-        require:true,
+        require:true
+        
     },
     name:{
         type:String,
@@ -32,7 +33,7 @@ const schema=mongoose.Schema({
     },
     code:{
         type:String,
-        unique:true
+        
     }
 
 },{timestamps:true})
