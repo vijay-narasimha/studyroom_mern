@@ -9,13 +9,8 @@ const app = require('./app');
 const db = process.env.MONGODB;
 const port = process.env.PORT || 5000;
 
-
-
-
 mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-  })
+  .connect(db)
 const server=app.listen(port,()=>{
   console.log('listening')
 })
