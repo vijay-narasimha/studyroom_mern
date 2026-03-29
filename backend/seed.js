@@ -714,6 +714,23 @@ async function seed() {
         'No rooms found in messages-only mode. Run without --messages-only first to seed users/rooms.',
       );
     }
+
+    for (const room of existingRooms) {
+      const topicInfo = await Topic.findById(room.topic);
+      if (!room.topicname && topicInfo) room.topicname = topicInfo.name;
+      if (!room.hostname) {
+        const hostInfo = await User.findById(room.host);
+        room.hostname = hostInfo?.name || createdUsers[0].name;
+      }
+      if (!room.participants || room.participants.length === 0) {
+        room.participants = createdUsers.map((u) => u._id);
+      }
+      if (room.isModified()) {
+        await room.save();
+        log('🔄', `Normalized existing room: ${room.name}`);
+      }
+    }
+
     createdRooms.push(...existingRooms);
   } else {
     // ── 4c. Create / upsert users ────────────────────────────────
@@ -750,18 +767,47 @@ async function seed() {
       const host = createdUsers[0];
 
       let room = await Room.findOne({ name: roomData.name });
+      const desiredRoomProps = {
+        name: roomData.name,
+        description: roomData.description,
+        topic: topic._id,
+        host: host._id,
+        participants: createdUsers.map((u) => u._id),
+        topicname: roomData.topicName,
+        hostname: host.name,
+      };
+
       if (room) {
-        log('⏭️ ', `Room already exists — skipping: ${roomData.name}`);
-      } else {
-        room = await Room.create({
-          name: roomData.name,
-          description: roomData.description,
-          topic: topic._id,
-          host: host._id,
-          participants: createdUsers.map((u) => u._id),
+        const shouldUpdate = Object.keys(desiredRoomProps).some((key) => {
+          if (key === 'participants') {
+            const existingIds = (room.participants || []).map((i) =>
+              i.toString(),
+            );
+            const desiredIds = (desiredRoomProps.participants || []).map((i) =>
+              i.toString(),
+            );
+            return (
+              desiredIds.length !== existingIds.length ||
+              !desiredIds.every((id) => existingIds.includes(id))
+            );
+          }
+          const current = room[key];
+          const target = desiredRoomProps[key];
+          return String(current || '') !== String(target || '');
         });
+
+        if (shouldUpdate) {
+          Object.assign(room, desiredRoomProps);
+          await room.save();
+          log('🔄', `Updated room data: ${roomData.name}`);
+        } else {
+          log('⏭️ ', `Room already exists and is up to date: ${roomData.name}`);
+        }
+      } else {
+        room = await Room.create(desiredRoomProps);
         log('✅', `Created room: "${room.name}" (host: ${host.name})`);
       }
+
       createdRooms.push(room);
     }
   }
