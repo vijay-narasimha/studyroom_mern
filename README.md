@@ -63,6 +63,22 @@ StudyRoom is a full-stack web application built with the **MERN stack** (MongoDB
 3. Configure environment variables (e.g., `MONGO_URI`, `JWT_SECRET`).
 4. `npm start` (or `npm run dev` if using nodemon).
 
+### Seeder Script
+
+To populate the database with dummy users, rooms, and messages:
+
+- Full seed (create users/rooms/messages):
+  - `node seed.js`
+- Clean and seed everything from scratch:
+  - `node seed.js --clean`
+- Add messages only (use existing users/rooms):
+  - `node seed.js --messages-only`
+
+Example (if using local Mongo URI directly):
+
+- `MONGO_URI=mongodb://localhost:27017/studyroom node seed.js`
+- `MONGO_URI=mongodb://localhost:27017/studyroom node seed.js --messages-only`
+
 ### Frontend
 
 1. `cd frontend`
@@ -73,4 +89,3 @@ StudyRoom is a full-stack web application built with the **MERN stack** (MongoDB
 
 - The frontend expects the backend API to be running (default: `http://localhost:5000`).
 - Ensure MongoDB is running and accessible via your connection string.
-
